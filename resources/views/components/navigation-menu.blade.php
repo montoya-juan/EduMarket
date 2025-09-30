@@ -51,10 +51,15 @@
                     </nav>
                 </div--->
                 <div class="sb-sidenav-menu-heading">Modulos</div>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('categorias.index') }}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-tags"></i></div>
-                    Categorias
+                    Categorías
                 </a>
+                <a class="nav-link" href="{{ route('presentaciones.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    Presentaciones
+                </a>
+
                 <a class="nav-link" href="#">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Tables

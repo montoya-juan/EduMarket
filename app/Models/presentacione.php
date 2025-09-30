@@ -10,10 +10,11 @@ class presentacione extends Model
     USE HasFactory;
 
     public function productos(){
-        return $this->belongsToMany(producto::class);
+        return $this->belongsToMany(producto::class)->withTimestamps();
     }
     
     public function caracteristica(){
         return $this->belongsTo(caracteristica::class);
     }
+    protected $fillable = ['caracteristica_id'];
 }
