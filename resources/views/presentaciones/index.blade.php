@@ -11,7 +11,7 @@
 
     @if (session('success'))
         <script>
-            let message = "{{session('success')}}";
+            let message = "{{ session('success') }}";
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -38,7 +38,7 @@
         </ol>
 
     </div>
-    
+
     <div class="mb-4">
         <a href="{{ route('presentaciones.create') }}">
             <button type="button" class="btn btn-primary">Añadir nuevo registro</button></a>
@@ -69,31 +69,32 @@
                                 {{ $presentacione->caracteristica->descripcion }}
                             </td>
                             <td>
-                                @if ($presentacione->caracteristica->estado ==1)
-                                <span class="fw-bolder rounded  p-1 bg-success text-white">Activo</span>
-                                    
+                                @if ($presentacione->caracteristica->estado == 1)
+                                    <span class="fw-bolder rounded  p-1 bg-success text-white">Activo</span>
                                 @else
-                                <span class="fw-bolder rounded p-1 bg-danger text-white">Eliminado</span>    
+                                    <span class="fw-bolder rounded p-1 bg-danger text-white">Eliminado</span>
                                 @endif
                             </td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
 
-                                    <form action="{{ route('presentaciones.edit', ['presentacione' => $presentacione]) }}"><button
-                                            type="submit " class="btn btn-warning">Editar</button></form>
+                                    <form action="{{ route('presentaciones.edit', ['presentacione' => $presentacione]) }}">
+                                        <button type="submit " class="btn btn-warning">Editar</button></form>
 
-                                            @if ($presentacione->caracteristica->estado == 1)
-                                                <button type="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$presentacione->id}}">Eliminar</button>
-                                            @else
-                                                <button type="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmModal-{{$presentacione->id}}">Restaurar</button>
-                                            @endif
+                                    @if ($presentacione->caracteristica->estado == 1)
+                                        <button type="" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#confirmModal-{{ $presentacione->id }}">Eliminar</button>
+                                    @else
+                                        <button type="" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#confirmModal-{{ $presentacione->id }}">Restaurar</button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="confirmModal-{{$presentacione->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="confirmModal-{{ $presentacione->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -102,15 +103,17 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        {{$presentacione->caracteristica->estado ==1 ? '¿Seguro que quieres eliminar esta categoría?':'¿Seguro que quieres restaurar esta categoría?'}}
+                                        {{ $presentacione->caracteristica->estado == 1 ? '¿Seguro que quieres eliminar esta Presentación?' : '¿Seguro que quieres restaurar esta Presentación?' }}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Cerrar</button>
-                                            <form action="{{route('presentaciones.destroy',['presentacione'=>$presentacione->id])}}" method="post">
+                                        <form
+                                            action="{{ route('presentaciones.destroy', ['presentacione' => $presentacione->id]) }}"
+                                            method="post">
                                             @method('DELETE')
                                             @csrf
-                                        <button type="submit" class="btn btn-danger">Confirmar</button>
+                                            <button type="submit" class="btn btn-danger">Confirmar</button>
                                         </form>
                                     </div>
                                 </div>
